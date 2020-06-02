@@ -11,6 +11,7 @@ public class GuessingGameTest {
     @Before // This method will be run before any of our tests
     public final void setup() {
         guessingGame = new GuessingGame();
+        guessingGame.setAttempts(5);
     }
 
     @Test
@@ -27,7 +28,9 @@ public class GuessingGameTest {
 
     @Test
     public final void testDidUserWin() {
-        Assert.assertTrue(guessingGame.didYouWin(25, 25));
+        int randomNum = guessingGame.setRandomNum(10);
+        int numGuess = guessingGame.setNumGuess(10);
+        Assert.assertTrue(guessingGame.didYouWin(randomNum, numGuess));
     }
 
     @Test

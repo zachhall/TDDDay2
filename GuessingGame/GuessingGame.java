@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class GuessingGame {
 
-    final static int randomNum = createRandomNumber();
+    static int randomNum = createRandomNumber();
+    static int numGuess = 0;
     static boolean winCondition = false;
     static boolean quitCondition = false;
     static int attempts = 0;
@@ -26,16 +27,15 @@ public class GuessingGame {
     }
 
     public static int getUserGuess() {
-        int numGuess = 0;
 
         System.out.println("--- --- ---");
         System.out.println("Guess a number between 1 and 100");
         System.out.println("The correct answer is " + randomNum);
 
-        if (attempts > 0) {
-            System.out.println("You have " + (5 - attempts) + " attempts left");
-        } else if (attempts == 4) {
+        if (attempts == 4) {
             System.out.println("This is your last attempt!");
+        } else if (attempts > 0) {
+            System.out.println("You have " + (5 - attempts) + " attempts left");
         }
 
         String guess = scan.next(); // Intakes String
@@ -64,21 +64,14 @@ public class GuessingGame {
         if (guess == randomNum) {
             System.out.println("Congrats, you win!");
             winCondition = true;
-        } else if (guess > randomNum) {
+        } else {
             attempts += 1;
             if (attempts == 5) {
                 System.out.println("You didn't guess the right number in time.\nYou lost!");
                 quitCondition = true;
-            } else {
+            } else if (guess > randomNum) {
                 System.out.println("Sorry, your guess is too high. Try again.");
-            }
-        } else if (guess < randomNum) {
-            attempts += 1;
-
-            if (attempts == 5) {
-                System.out.println("You didn't guess the right number in time.\nYou lost!");
-                quitCondition = true;
-            } else {
+            } else if (guess < randomNum) {
                 System.out.println("Sorry, your guess is too low. Try again.");
             }
         }
@@ -94,6 +87,20 @@ public class GuessingGame {
 
     public int getAttempts() {
         return attempts;
+    }
+
+    public void setAttempts(int i) {
+        attempts = i;
+    }
+
+    public int setRandomNum(int i) {
+        randomNum = i;
+        return randomNum;
+    }
+
+    public int setNumGuess(int i) {
+        numGuess = i;
+        return numGuess;
     }
 
 }
