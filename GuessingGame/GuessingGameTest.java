@@ -21,7 +21,7 @@ public class GuessingGameTest {
 
     @Test
     public final void testDoesUserGuessExist() {
-        int guess = guessingGame.getUserGuess();
+        int guess = guessingGame.getUserGuess(25);
         Assert.assertTrue(guess <= 100 && guess >= 1);
     }
 
