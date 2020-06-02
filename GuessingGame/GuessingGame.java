@@ -4,11 +4,16 @@ import java.util.Scanner;
 
 public class GuessingGame {
 
-    int guess;
+    final static int randomNum = createRandomNumber();
+    static int userGuess = getUserGuess();
+    static boolean winCondition = false;
 
     public static void main(String[] args) {
 
-        final int randomNum = createRandomNumber();
+        // while (!winCondition) {
+        // getUserGuess();
+        // }
+        // winCondition = didYouWin(userGuess);
 
     }
 
@@ -22,13 +27,28 @@ public class GuessingGame {
         System.out.println("Guess a number between 1 and 100");
         Scanner scan = new Scanner(System.in);
         int guess = scan.nextInt();
+        scan.close();
         return guess;
     }
 
     public int getUserGuess(int i) { // Overload for testing purposes
-        System.out.println("Guess a number between 1 and 100");
-        int guess = i;
-        return guess;
+        return i;
+    }
+
+    public static boolean didYouWin(int guess) {
+        if (guess == randomNum) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean didYouWin(int guess, int testNum) {
+        if (guess == testNum) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -15,7 +15,7 @@ public class GuessingGameTest {
 
     @Test
     public final void testIfRandomNumberIsBetween1And100() {
-        int num = guessingGame.createRandomNumber();
+        int num = GuessingGame.createRandomNumber();
         Assert.assertTrue(num <= 100 && num >= 1);
     }
 
@@ -23,6 +23,12 @@ public class GuessingGameTest {
     public final void testDoesUserGuessExist() {
         int guess = guessingGame.getUserGuess(25);
         Assert.assertTrue(guess <= 100 && guess >= 1);
+    }
+
+    @Test
+    public final void testDidUserWin() {
+        // int guess = guessingGame.getUserGuess(25);
+        Assert.assertTrue(guessingGame.didYouWin(25, 25));
     }
 
 }
