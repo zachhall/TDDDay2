@@ -35,4 +35,10 @@ public class GuessingGameTest {
         Assert.assertEquals("Quit", guessingGame.getUserGuess("Quit"));
     }
 
+    @Test
+    public final void testIfUserHasUsedAllAvailableAttempts() {
+        int attempts = guessingGame.getAttempts();
+        Assert.assertTrue(attempts <= 5);
+    }
+
 }

@@ -11,11 +11,12 @@ public class GuessingGame {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (!winCondition || !quitCondition) {
+        while (!winCondition && !quitCondition) {
             int userGuess = getUserGuess();
             didYouWin(userGuess);
         }
         System.out.println("Goodbye!");
+        scan.close();
     }
 
     public static final int createRandomNumber() {
@@ -32,12 +33,14 @@ public class GuessingGame {
         System.out.println("The correct answer is " + randomNum);
 
         if (attempts > 0) {
-            System.out.println("This is attempt #" + attempts);
+            System.out.println("You have " + (5 - attempts) + " attempts left");
+        } else if (attempts == 4) {
+            System.out.println("This is your last attempt!");
         }
 
         String guess = scan.next(); // Intakes String
 
-        if (guess == "Quit") { // Test if string entered is Quit
+        if (guess.equals("Quit")) { // Test if string entered is Quit
             System.out.println("See you next time!");
             quitCondition = true; // Should break out of our main() while loop
         } else {
@@ -60,15 +63,24 @@ public class GuessingGame {
     public static void didYouWin(int guess) {
         if (guess == randomNum) {
             System.out.println("Congrats, you win!");
-            scan.close();
             winCondition = true;
         } else if (guess > randomNum) {
             attempts += 1;
-
-            System.out.println("Sorry, your guess is too high. Try again.");
+            if (attempts == 5) {
+                System.out.println("You didn't guess the right number in time.\nYou lost!");
+                quitCondition = true;
+            } else {
+                System.out.println("Sorry, your guess is too high. Try again.");
+            }
         } else if (guess < randomNum) {
             attempts += 1;
-            System.out.println("Sorry, your guess is too low. Try again.");
+
+            if (attempts == 5) {
+                System.out.println("You didn't guess the right number in time.\nYou lost!");
+                quitCondition = true;
+            } else {
+                System.out.println("Sorry, your guess is too low. Try again.");
+            }
         }
     }
 
@@ -78,6 +90,10 @@ public class GuessingGame {
         } else {
             return false;
         }
+    }
+
+    public int getAttempts() {
+        return attempts;
     }
 
 }
