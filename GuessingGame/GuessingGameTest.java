@@ -30,4 +30,9 @@ public class GuessingGameTest {
         Assert.assertTrue(guessingGame.didYouWin(25, 25));
     }
 
+    @Test
+    public final void testIfTheUserWantsToQuit() {
+        Assert.assertEquals("Quit", guessingGame.getUserGuess("Quit"));
+    }
+
 }

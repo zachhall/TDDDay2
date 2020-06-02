@@ -6,11 +6,12 @@ public class GuessingGame {
 
     final static int randomNum = createRandomNumber();
     static boolean winCondition = false;
+    static boolean quitCondition = false;
     static int attempts = 0;
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (!winCondition) {
+        while (!winCondition || !quitCondition) {
             int userGuess = getUserGuess();
             didYouWin(userGuess);
         }
@@ -24,18 +25,36 @@ public class GuessingGame {
     }
 
     public static int getUserGuess() {
+        int numGuess = 0;
+
         System.out.println("--- --- ---");
         System.out.println("Guess a number between 1 and 100");
         System.out.println("The correct answer is " + randomNum);
+
         if (attempts > 0) {
             System.out.println("This is attempt #" + attempts);
         }
-        int guess = scan.nextInt();
+
+        String guess = scan.next(); // Intakes String
+
+        if (guess == "Quit") { // Test if string entered is Quit
+            System.out.println("See you next time!");
+            quitCondition = true; // Should break out of our main() while loop
+        } else {
+            numGuess = Integer.parseInt(guess);
+            // Similar to our StringCalculator yesterday, if user input isn't an integer an
+            // exception will be thrown
+        }
+        return numGuess;
+
+    }
+
+    public String getUserGuess(String guess) { // Overload for testing purposes
         return guess;
     }
 
-    public int getUserGuess(int i) { // Overload for testing purposes
-        return i;
+    public int getUserGuess(int guess) {
+        return guess;
     }
 
     public static void didYouWin(int guess) {
