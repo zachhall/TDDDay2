@@ -27,7 +27,6 @@ public class GuessingGameTest {
 
     @Test
     public final void testDidUserWin() {
-        // int guess = guessingGame.getUserGuess(25);
         Assert.assertTrue(guessingGame.didYouWin(25, 25));
     }
 
